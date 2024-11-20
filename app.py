@@ -6,11 +6,16 @@ import json
 from pymongo import MongoClient
 from datetime import datetime
 from bson import ObjectId
+from flask_cors import CORS  # Import CORS
+
 
 # Flask Setup
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins="*")
+
+CORS(app)
+
 
 # MongoDB Setup
 client = MongoClient('mongodb://mongo-db:27017/')

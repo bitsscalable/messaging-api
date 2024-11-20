@@ -5,3 +5,4 @@ requests==2.30.0
 flask_socketio
 pika
 pymongo
+flask-cors
