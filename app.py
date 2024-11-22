@@ -151,11 +151,19 @@ def get_user_channels(username):
     API to fetch channels for a given username.
     """
     try:
-        # Fetch channels where the user is a participant
+        # Fetch channels where the user is sender
         channels = channels_collection.find({"username": username})
         
         # Convert MongoDB cursor to a list
-        channel_list = [channel["peer"] for channel in channels]
+        channel_list1 = [channel["peer"] for channel in channels]
+
+        # Fetch channels where the user is a reciever
+        channels = channels_collection.find({"peer": username})
+        
+        # Convert MongoDB cursor to a list
+        channel_list2 = [channel["username"] for channel in channels]
+
+        channel_list = channel_list1 + channel_list2
         
         return jsonify({"status": "success", "peers": channel_list}), 200
     except Exception as e:
