@@ -1,5 +1,6 @@
 FROM python:3.13-slim
 
+
 # Step 2: Set the working directory in the container
 WORKDIR /app
 
@@ -20,3 +21,4 @@ ENV FLASK_APP=app.py
 
 # Step 8: Run the application
 CMD ["python", "app.py"]
+

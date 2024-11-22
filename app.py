@@ -9,6 +9,13 @@ from bson import ObjectId
 from flask_cors import CORS  # Import CORS
 from gevent import monkey
 import hashlib
+import logging
+
+
+logging.basicConfig(level=logging.DEBUG)
+logging.getLogger('pymongo').setLevel(logging.WARNING)
+logging.getLogger('pika').setLevel(logging.WARNING)
+
 
 
 # Flask Setup
