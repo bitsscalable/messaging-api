@@ -7,7 +7,9 @@ from pymongo import MongoClient
 from datetime import datetime
 from bson import ObjectId
 from flask_cors import CORS  # Import CORS
-from gevent import monkey
+import eventlet
+import eventlet.wsgi
+
 import hashlib
 import logging
 
@@ -21,7 +23,7 @@ logging.getLogger('pika').setLevel(logging.WARNING)
 # Flask Setup
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
 
 CORS(app)
 
@@ -163,8 +165,5 @@ if __name__ == '__main__':
 
     # Start RabbitMQ listener in a separate thread
     threading.Thread(target=start_rabbitmq_listener, daemon=True).start()
-
-    #monkey.patch_all()
-    monkey.patch_socket()
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True, allow_unsafe_werkzeug=True)
+    eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)
 
