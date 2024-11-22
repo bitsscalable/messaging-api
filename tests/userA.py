@@ -13,6 +13,12 @@ def connect():
 def on_new_message(data):
     print("UserA received message:", data)
 
+
+@sio.on('chat_history')
+def on_chat_history(data):
+    print("UserA received message:", data)
+
+
 # Connect to the server
 sio.connect('http://localhost:5000')
 
@@ -23,9 +29,10 @@ sio.emit('join', {'username': 'userA', 'peer': 'userB'})
 sio.emit('new_message', {
     'sender': 'userA',
     'recipient': 'userB',
-    'message': 'Hello from userA!',
+    'message': 'Hello3 from userA!',
     'timestamp': '2024-11-20T12:00:00Z'
 })
+
 
 # Keep the connection open to listen for events
 sio.wait()

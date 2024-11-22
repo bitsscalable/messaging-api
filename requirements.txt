@@ -6,3 +6,5 @@ flask_socketio
 pika
 pymongo
 flask-cors
+gevent
+gevent-websocket
