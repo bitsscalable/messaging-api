@@ -20,6 +20,6 @@ EXPOSE 5000
 ENV FLASK_APP=app.py
 
 # Step 8: Run the application
-#CMD ["python", "app.py"]
-CMD ["gunicorn","-k","eventlet","-w","1","-b","0.0.0.0:5000","app:app"]
+CMD ["python", "app.py"]
+#CMD ["gunicorn","-k","eventlet","-w","2","-b","0.0.0.0:5000","app:app","--log-level","debug"]
 

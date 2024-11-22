@@ -161,6 +161,12 @@ def get_user_channels(username):
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+# Add a function to start the listener (to be called explicitly in the worker lifecycle)
+# def start_listener_in_worker():
+#     listener_thread = threading.Thread(target=start_rabbitmq_listener)
+#     listener_thread.daemon = True
+#     listener_thread.start()
+
 if __name__ == '__main__':
 
     # Start RabbitMQ listener in a separate thread
