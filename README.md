@@ -4,6 +4,13 @@ Ensure you have the following installed on your system:
 
 - [Docker](https://www.docker.com/) (for containerization)
 
+- Create a local docker network
+
+```
+docker network create mynetwork
+
+```
+
 - Run the mongodb as a container
 ```
 docker run --name mongo-db -p 27017:27017 -d mongo:latest
@@ -30,4 +37,4 @@ docker build -t messaging-api .
 
 ### Step 3: Run the container
 
-docker run -d --name messaging-api -p 5000:5000 messaging-api
+docker run -d --name messaging-api --network mynetwork -p 5000:5000 messaging-api
